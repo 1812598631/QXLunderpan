@@ -6,7 +6,7 @@
 #define PS2_CLK        12  //12
 #define rumble      false
 #define pressures   false
-int pwm1 = 5, pwm11 = 4, pwm2 = 3, pwm22 = 2, pwm3 = 9, pwm33 = 8, pwm4 = 7, pwm44 = 6;
+int pwm1 = 5, pwm11 = 4, pwm2 = 3, pwm22 = 2, pwm3 = 8, pwm33 = 9, pwm4 = 6, pwm44 = 7;
 #define MOTOR_MAX_RPM 250        // motor's maximum rpm
 #define WHEEL_DIAMETER 0.038      // robot's wheel diameter expressed in meters
 #define FR_WHEEL_DISTANCE 0.128   // distance between front wheel and rear wheel
@@ -30,14 +30,11 @@ void (* resetFunc) (void) = 0;
 void Motor_refresh()
 {
   pwm = kinematics.getPWM(linear_vel_x, linear_vel_y, angular_vel_z);
-  //pwm.motor1 = -200;
- //pwm.motor2 = -200;
- // pwm.motor3 = -200;
-  //pwm.motor4 = -200;
+
   
   if (pwm.motor1 < 0) {
-    int pwm_1 = -1 * pwm.motor1;
-        if(pwm_1>255)
+  int pwm_1 = -1 * pwm.motor1;
+  if(pwm_1>255)
     pwm_1=255;
     analogWrite(pwm11, pwm_1);
     analogWrite(pwm1,0);
@@ -46,9 +43,9 @@ void Motor_refresh()
   }
   else
   {
-     if(pwm.motor1>255)
+   if(pwm.motor1>255)
     pwm.motor1=255;
-    analogWrite(pwm11, 0);
+    analogWrite(pwm11,0);
     analogWrite(pwm1,pwm.motor1);
     Serial.print("pwm1=");
     Serial.println(pwm.motor1);
@@ -74,7 +71,7 @@ void Motor_refresh()
   }
   if (pwm.motor3 < 0)
   {
-    int pwm_3 = -1 * pwm.motor3;
+   int pwm_3 = -1 * pwm.motor3;
    if(pwm_3>255)
     pwm_3=255;
     analogWrite(pwm33, pwm_3);
@@ -124,7 +121,7 @@ void Go_back()
   linear_vel_x = 0;  // 1 m/s
   linear_vel_y = -0.3;  // 0 m/s
   angular_vel_z = 0; // 1 m/s
-    Motor_refresh();
+  Motor_refresh();
 }
 
 void Go_left()
@@ -132,7 +129,7 @@ void Go_left()
   linear_vel_x = 0.3;  // 1 m/s
   linear_vel_y = 0;  // 0 m/s
   angular_vel_z = 0; // 1 m/s
-    Motor_refresh();
+  Motor_refresh();
 }
 
 void Go_right()
@@ -230,7 +227,7 @@ void loop() {
     Kinematics::output rpm;
     Kinematics::output pwm;
     //if(h==1)
-    rocker();
+    //rocker();
       if(error == 1){ //skip loop if no controller found
     resetFunc();
   }
