@@ -1,1 +1,3 @@
-# QXLunderpanControl
+# Arduino四轮全向移动小车遥控程序
+PS2遥控
+全向轮运动分解部分Kinematics库
